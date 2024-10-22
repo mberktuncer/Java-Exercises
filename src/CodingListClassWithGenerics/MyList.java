@@ -1,5 +1,7 @@
 package CodingListClassWithGenerics;
 
+import java.util.Arrays;
+
 public class MyList <T>{
 
     int capacity;
@@ -35,10 +37,6 @@ public class MyList <T>{
             tempArray[i] = array[i];
         }
         array = tempArray;
-    }
-
-    public int getIndex(int index) {
-        return (int) array[index];
     }
 
     public T remove(int index){
@@ -81,6 +79,59 @@ public class MyList <T>{
         return capacity;
     }
 
+    public int getIndexOf(T data){
+        for (int i = 0; i < array.length; i++){
+            if (array[i] == data){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int lastIndexOf(T data){
+        for (int i = array.length - 1; i >= 0; i--){
+            if (array[i] == data){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public boolean isEmpty(){
+        return !(array.length > 0);
+    }
+
+    public T[] toArray(){
+        T[] tempArray = (T[]) new Object[array.length];
+        for (int i = 0; i < array.length; i++){
+            tempArray[i] = array[i];
+        }
+        return tempArray;
+    }
+
+    public void clear(){
+        for (int i = 0; i < array.length; i++){
+            array[i] = null;
+        }
+    }
+
+    public T[] sublist(int start, int finish){
+        T[] tempArray = (T[]) new Object[finish - start + 1];
+        for (int i = start; i <= finish; i++){
+            int j = 0;
+            tempArray[j] = array[i];
+            j++;
+        }
+        return tempArray;
+    }
+
+    public boolean contains(T data){
+        for (T t : array) {
+            if (t == data)
+                return true;
+        }
+        return false;
+    }
 }
 
 class Main {
@@ -92,7 +143,7 @@ class Main {
         list.add(30);
         System.out.println("list created");
         System.out.println(list.toString());
-        System.out.println("value of 2. index : " + list.getIndex(2));
+        System.out.println("value of 2. index : " + list.getIndexOf(2));
         list.remove(2);
         System.out.println("after delete index 2");
         System.out.println(list.toString());
@@ -102,5 +153,17 @@ class Main {
         list.set(0, 100);
         System.out.println("first element set to 100");
         System.out.println(list.toString());
+        list.add(100);
+        System.out.print("Index of 100: ");
+        System.out.println(list.getIndexOf(100));
+        System.out.print("Last index of 100: ");
+        System.out.println(list.lastIndexOf(100));
+        System.out.print("Check if list is empty: ");
+        System.out.println(list.isEmpty());
+
+        System.out.println(list.contains(40));
+
+
+
     }
 }
